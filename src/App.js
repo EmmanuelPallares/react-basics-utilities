@@ -7,7 +7,17 @@ export default class App extends Component {
   constructor() {
     super();
     this.state = {
-      string: "Try to change this string",
+      pokemons: [
+        {
+          name: "Pikachu",
+          id: "id1",
+        },
+
+        { name: "Bolvasour", id: "id1" },
+        { name: "Charizard", id: "id2" },
+        { name: "Snorglax", id: "id3" },
+        { name: "Squero" },
+      ],
     };
   }
   render() {
@@ -16,22 +26,13 @@ export default class App extends Component {
         <div className="App">
           <header className="App-header">
             <img src={logo} className="App-logo" alt="logo" />
-            <p>{this.state.string}</p>
+            <h1>Function .map()</h1>
 
-            <button
-              onClick={() => {
-                this.setState({ string: "Text Changed" });
-              }}
-            >
-              Change the string from this button
-            </button>
-            <button
-              onClick={() => {
-                this.setState({ string: "String from class name" });
-              }}
-            >
-              Reset Changes
-            </button>
+            <div>
+              {this.state.pokemons.map((pokemon) => (
+                <h1 key={pokemon.id}>{pokemon.name}</h1>
+              ))}
+            </div>
           </header>
         </div>
       </div>
