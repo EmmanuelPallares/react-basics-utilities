@@ -7,42 +7,22 @@ export default class App extends Component {
   constructor() {
     super();
     this.state = {
-      string: "String from class name",
+      monsters: [],
     };
+  }
+
+  componentDidMount() {
+    fetch("https://jsonplaceholder.typicode.com/users")
+      .then((response) => response.json())
+      .then((users) => this.setState({ monsters: users }));
   }
   render() {
     return (
       <div>
         <div className="App">
-          <header className="App-header">
-            <img src={logo} className="App-logo" alt="logo" />
-            <p>
-              Edit <code>src/App.js</code> and save to reload.
-            </p>
-            <p>{this.state.string}</p>
-            <button
-              onClick={() => {
-                this.setState({ string: "Text Changed" });
-              }}
-            >
-              Change the string from this button
-            </button>
-            <button
-              onClick={() => {
-                this.setState({ string: "String from class name" });
-              }}
-            >
-              Reset Changes
-            </button>
-            <a
-              className="App-link"
-              href="https://reactjs.org"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Learn React
-            </a>
-          </header>
+          {this.state.monsters.map((monster) => (
+            <h1>{monster.name}</h1>
+          ))}
         </div>
       </div>
     );
