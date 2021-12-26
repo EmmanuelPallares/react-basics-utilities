@@ -1,5 +1,6 @@
-import logo from "./logo.svg";
 import "./App.css";
+import { CardList } from "./components/card-list/card-list";
+import { SearchBox } from "./components/search-box/search";
 
 import React, { Component } from "react";
 
@@ -8,8 +9,14 @@ export default class App extends Component {
     super();
     this.state = {
       monsters: [],
+      search: "",
     };
+
+    this.handleChange = this.handleChange.bind(this);
   }
+  handleChange = (e) => {
+    this.setState({ search: e.target.value });
+  };
 
   componentDidMount() {
     fetch("https://jsonplaceholder.typicode.com/users")
@@ -17,13 +24,18 @@ export default class App extends Component {
       .then((users) => this.setState({ monsters: users }));
   }
   render() {
+    const { monsters, search } = this.state;
+    const filteredMonsters = monsters.filter((monster) =>
+      monster.name.toLowerCase().includes(search.toLowerCase())
+    );
     return (
-      <div>
-        <div className="App">
-          {this.state.monsters.map((monster) => (
-            <h1>{monster.name}</h1>
-          ))}
-        </div>
+      <div className="App">
+        <h1>React Monsters</h1>
+        <SearchBox
+          placeholder="Search the monsters"
+          handleChange={this.handleChange}
+        />
+        <CardList monsters={filteredMonsters}></CardList>
       </div>
     );
   }
