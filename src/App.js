@@ -6,44 +6,30 @@ import React, { Component } from "react";
 export default class App extends Component {
   constructor() {
     super();
-    this.state = {
-      string: "String from class name",
-    };
   }
+
   render() {
+    const notes = [
+      {
+        id: 1,
+        name: "Recado de comida",
+        lugar: "Valle de santiago",
+        remitente: "Emmanuel",
+        costoEnvio: 1400,
+      },
+      {
+        id: 2,
+        name: "Recado de comida 2",
+        lugar: "Valle de santiago2",
+        remitente: "Emmanuel2",
+        costoEnvio: 14009,
+      },
+    ];
     return (
       <div>
-        <div className="App">
-          <header className="App-header">
-            <img src={logo} className="App-logo" alt="logo" />
-            <p>
-              Edit <code>src/App.js</code> and save to reload.
-            </p>
-            <p>{this.state.string}</p>
-            <button
-              onClick={() => {
-                this.setState({ string: "Text Changed" });
-              }}
-            >
-              Change the string from this button
-            </button>
-            <button
-              onClick={() => {
-                this.setState({ string: "String from class name" });
-              }}
-            >
-              Reset Changes
-            </button>
-            <a
-              className="App-link"
-              href="https://reactjs.org"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Learn React
-            </a>
-          </header>
-        </div>
+        {notes.map((note) => {
+          return note.id;
+        })}
       </div>
     );
   }
